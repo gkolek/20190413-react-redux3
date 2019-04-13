@@ -15,19 +15,21 @@ class TodoAdd extends React.Component {
     handleClick = () => {
         this.props.addTodo(this.state.text)
         this.setState({
-            text: ''
+            text:''
         })
     }
+
 
     render() {
         return (
             <div>
-                <input value={this.state.text} onChange={this.handleChange} />
+                <input value ={this.state.text} onChange={this.handleChange} />
                 <button type="button" onClick={this.handleClick}>Add</button>
             </div>
         )
     }
 }
+
 
 const mapDispatchToProps = dispatch => ({
     addTodo: text => dispatch({

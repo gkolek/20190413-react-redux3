@@ -1,4 +1,5 @@
 const ADD_TODO = 'ADD_TODO';
+const SET_TODOS = 'SET_TODOS'
 let idCounter = 0
 
 const todoReducer = (state = [], action) => {
@@ -12,8 +13,28 @@ const todoReducer = (state = [], action) => {
                 ...state,
                 newTodo
             ]
+        case SET_TODOS:
+            return action.todos
         default:
             return state
+    }
+}
+
+const mapFbObjectToArray = data => Object.entries(data).map(item => ({
+    id: item[0],
+    ...item[1]
+}))
+
+export const loadTodos = () => {
+    return dispatch => {
+        fetch('https://isajfdzl2.firebaseio.com/todos.json')
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: SET_TODOS,
+                    todos: mapFbObjectToArray(data)
+                })
+            })
     }
 }
 
