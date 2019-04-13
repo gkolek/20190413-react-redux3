@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
+import {addTodo}from './store/todo'
 
 class TodoAdd extends React.Component {
 
@@ -32,10 +33,7 @@ class TodoAdd extends React.Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: text => dispatch({
-        type: 'ADD_TODO',
-        text
-    })
+    addTodo: text => dispatch(addTodo(text))
 })
 
 export default connect(

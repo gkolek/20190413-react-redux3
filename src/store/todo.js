@@ -38,4 +38,22 @@ export const loadTodos = () => {
     }
 }
 
+export const addTodo = text => {
+    return dispatch => {
+        fetch('https://isajfdzl2.firebaseio.com/todos.json', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text: text })
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    return dispatch(loadTodos())
+                }
+            })
+    }
+
+}
+
 export default todoReducer
