@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { loadTodos } from './store/todo'
+import { loadTodos, deleteTodo } from './store/todo'
 
 class TodoList extends React.Component {
 
@@ -14,8 +14,9 @@ class TodoList extends React.Component {
                 {
                     this.props.todos &&
                     this.props.todos.map(todo => (
-                        <div>
-                            {todo.text}
+                        <div key={todo.id}>
+                            <span>{todo.text}</span>
+                            <button type="button" onClick={() => this.props.deleteTodo(todo.id)}>X</button>
                         </div>
                     ))
                 }
@@ -29,7 +30,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadTodos: () => dispatch(loadTodos())
+    loadTodos: () => dispatch(loadTodos()),
+    deleteTodo: id => dispatch(deleteTodo(id))
 })
 
 

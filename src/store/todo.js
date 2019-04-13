@@ -56,4 +56,18 @@ export const addTodo = text => {
 
 }
 
+export const deleteTodo = (id) => {
+    return dispatch => {
+        fetch(`https://isajfdzl2.firebaseio.com/todos/${id}.json`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    return dispatch(loadTodos())
+                }
+            })
+    }
+
+}
+
 export default todoReducer
