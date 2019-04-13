@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 
 import todoReducer from './store/todo'
-
 import './index.css';
 import App from './App';
 
@@ -18,5 +18,10 @@ const store = createStore(reducer,
 
 window.dispatch = store.dispatch
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// window.dispatch({type:'ADD_TODO', text:'first todo text'})
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root'));
 
